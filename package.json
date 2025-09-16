@@ -9,7 +9,8 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "dev": "npm run build && node dist/server.js"
+    "dev": "npm run build && node dist/server.js",
+    "start": "node dist/server.js"
   },
   "devDependencies": {
     "@hono/node-server": "^1.19.3",
