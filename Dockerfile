@@ -1,10 +1,15 @@
 FROM node:lts-alpine
 
-USER node
 WORKDIR /home/node
 
 COPY package*.json ./
 RUN npm ci --omit=dev --loglevel=verbose
+
+COPY --chown=node:node . ./
+
+USER node
+RUN npm run build
+RUN mv dist/* .
 
 ARG PORT
 EXPOSE ${PORT:-3000}
