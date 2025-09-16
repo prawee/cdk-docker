@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": [
-      "es2022"
+      "es2020", "DOM"
     ],
     "declaration": true,
     "strict": true,
@@ -25,6 +25,7 @@
       "./node_modules/@types"
     ]
   },
+  "include": ["src/**/*.ts"],
   "exclude": [
     "node_modules",
     "cdk.out"
