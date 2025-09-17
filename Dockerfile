@@ -1,17 +1,19 @@
-FROM node:lts-alpine
+FROM public.ecr.aws/lambda/nodejs:22
 
-WORKDIR /home/node
-
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm ci --loglevel=verbose
 
-COPY --chown=node:node . ./
+# Install all dependencies (including dev dependencies for build)
+RUN npm ci
 
-USER node
+# Copy source code
+COPY . ./
+
+# Build the application
 RUN npm run build
-RUN mv dist/* .
 
-ARG PORT
-EXPOSE ${PORT:-3000}
+# Remove dev dependencies after build to reduce image size
+RUN npm prune --omit=dev
 
-CMD ["npm", "run", "start"]
+# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+CMD [ "dist/lambda.handler" ]
