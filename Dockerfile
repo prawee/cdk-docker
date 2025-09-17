@@ -3,7 +3,7 @@ FROM node:lts-alpine
 WORKDIR /home/node
 
 COPY package*.json ./
-RUN npm ci --omit=dev --loglevel=verbose
+RUN npm ci --loglevel=verbose
 
 COPY --chown=node:node . ./
 
